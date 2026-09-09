@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Initializing parameters
-
+m1, m2 = 4, 6
+k1, k2, k3 = 5, 3, 7
 params = (m1, m2, k1, k2, k3)
 
 # Time settings
@@ -45,9 +46,15 @@ for i in range(N-1):
     y[i+1] = rk4_step(y[i], t[i], dt, params)
 
 # Plot
-plt.plot(t, x)
+plt.plot(t, y[0:,0])
 plt.xlabel("Time (s)")
-plt.ylabel("Position (m)")
+plt.ylabel("Position (m1)")
+plt.title("Mass-Spring Oscillator")
+plt.grid()
+plt.show()
+plt.plot(t, y[0:,2])
+plt.xlabel("Time (s)")
+plt.ylabel("Position (m2)")
 plt.title("Mass-Spring Oscillator")
 plt.grid()
 plt.show()
