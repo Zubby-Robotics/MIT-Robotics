@@ -1,0 +1,54 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Initializing parameters
+m = 1
+g = 9.80665
+L = 4
+theta0 = 60
+omega0 = -7
+
+# Time settings
+dt = 0.001
+T = 10
+N = int(T/dt)
+
+# Arrays
+theta = np.zeros(N)
+omega = np.zeros(N)
+t = np.linspace(0, T, N)
+
+theta[0] = x0
+omega[0] = v0
+
+# Setting up the differential equations
+def dthetadt(omega):
+    return omega
+
+def domegadt(theta):
+    return -g/L*sin(theta)
+
+# RK4 Loop
+for i in range(N-1):
+    k1theta = dthetadt(v[i])
+    k1v = domegadt(x[i], v[i])
+
+    k2theta = dthetadt(v[i] + 0.5*dt*k1v)
+    k2v = domegadt(x[i] + 0.5*dt*k1x)
+
+    k3x = dthetadt(v[i] + 0.5*dt*k2v)
+    k3v = domegadt(x[i] + 0.5*dt*k2x)
+
+    k4x = dthetadt(v[i] + dt*k3v)
+    k4omega = domegadt(x[i] + dt*k3x)
+
+    x[i+1] = x[i] + (dt/6)*(k1x + 2*k2x + 2*k3x + k4x)
+    v[i+1] = v[i] + (dt/6)*(k1v + 2*k2v + 2*k3v + k4v)
+
+# Plot
+plt.plot(t, x)
+plt.xlabel("Time (s)")
+plt.ylabel("Position (m)")
+plt.title("Mass-Spring Oscillator")
+plt.grid()
+plt.show()
