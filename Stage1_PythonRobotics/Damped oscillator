@@ -5,12 +5,21 @@ import matplotlib.pyplot as plt
 m = 1
 k = 5
 c = 2
-x[0] = 4
-v[0] = -3
+x0 = 4
+v0 = -2
+
+# Time settings
 dt = 0.001
 T = 10
 N = int(T/dt)
+
+# Arrays
+x = np.zeros(N)
+v = np.zeros(N)
 t = np.linspace(0, T, N)
+
+x[0] = x0
+v[0] = v0
 
 # Setting up the differential equations
 def dxdt(v):
