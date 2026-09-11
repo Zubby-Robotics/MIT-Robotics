@@ -18,8 +18,8 @@ theta = np.zeros(N)
 omega = np.zeros(N)
 t = np.linspace(0, T, N)
 
-theta[0] = x0
-omega[0] = v0
+theta[0] = theta0
+omega[0] = omega0
 
 # Setting up the differential equations
 def dthetadt(omega):
@@ -30,25 +30,25 @@ def domegadt(theta):
 
 # RK4 Loop
 for i in range(N-1):
-    k1theta = dthetadt(v[i])
-    k1v = domegadt(x[i], v[i])
+    k1theta = dthetadt(omega[i])
+    k1omega = domegadt(theta[i], omega[i])
 
-    k2theta = dthetadt(v[i] + 0.5*dt*k1v)
-    k2v = domegadt(x[i] + 0.5*dt*k1x)
+    k2theta = dthetadt(omega[i] + 0.5*dt*k1omega)
+    k2omega = domegadt(theta[i] + 0.5*dt*k1theta)
 
-    k3x = dthetadt(v[i] + 0.5*dt*k2v)
-    k3v = domegadt(x[i] + 0.5*dt*k2x)
+    k3theta = dthetadt(omega[i] + 0.5*dt*k2omega)
+    k3omega = domegadt(theta[i] + 0.5*dt*k2x)
 
-    k4x = dthetadt(v[i] + dt*k3v)
-    k4omega = domegadt(x[i] + dt*k3x)
+    k4theta = dthetadt(omega[i] + dt*k3omega)
+    k4omega = domegadt(theta[i] + dt*k3theta)
 
-    x[i+1] = x[i] + (dt/6)*(k1x + 2*k2x + 2*k3x + k4x)
-    v[i+1] = v[i] + (dt/6)*(k1v + 2*k2v + 2*k3v + k4v)
+    theta[i+1] = theta[i] + (dt/6)*(k1theta + 2*k2theta + 2*k3theta + k4theta)
+    omega[i+1] = omega[i] + (dt/6)*(k1omega + 2*k2omega + 2*k3omega + k4omega)
 
 # Plot
-plt.plot(t, x)
+plt.plot(t, theta)
 plt.xlabel("Time (s)")
 plt.ylabel("Position (m)")
-plt.title("Mass-Spring Oscillator")
+plt.title("Pendulum")
 plt.grid()
 plt.show()
