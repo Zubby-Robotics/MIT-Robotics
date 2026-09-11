@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 # Initializing parameters
 M, m = 4, 6
 L, g = 5, 9.80665
-params = (M, m, L, g)
+u = input(What input do you want?)
+params = (M, m, L, g, u)
 
 # Time settings
 dt = 0.0001
@@ -22,7 +23,7 @@ y[0, 3] = -0.3
 
 # Setting up the differential equations
 def f(y, params):
-    M, m, L, g = params
+    M, m, L, g, u = params
     x, v, omega, theta = y
 
     dx = v
