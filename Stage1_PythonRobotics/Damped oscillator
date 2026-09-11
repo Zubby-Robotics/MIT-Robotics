@@ -49,6 +49,6 @@ for i in range(N-1):
 plt.plot(t, x)
 plt.xlabel("Time (s)")
 plt.ylabel("Position (m)")
-plt.title("Mass-Spring Oscillator")
+plt.title("Damped Oscillator")
 plt.grid()
 plt.show()
